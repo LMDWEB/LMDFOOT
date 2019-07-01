@@ -70,7 +70,7 @@ class Register extends Component{
                                             <input name="email" type="email" placeholder="Your Email" value={this.state.email} onChange={this.handleInputChange} />
                                         </div>
                                         <div className="col-md-12 col-12 section-space--bottom--20">
-                                            <input name="password" type="password" placeholder="Your Email" value={this.state.password} onChange={this.handleInputChange} />
+                                            <input name="password" type="password" placeholder="Your Password" value={this.state.password} onChange={this.handleInputChange} />
                                         </div>
                                         <div className="col-12"><button>S'inscrire</button></div>
                                     </div>
