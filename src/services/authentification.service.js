@@ -1,13 +1,14 @@
 import { BehaviorSubject } from 'rxjs';
-
-import config from 'config';
 import { handleResponse } from '../helpers/handle-response';
+import history from '../helpers/history';
+import axios from 'axios';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 export const authenticationService = {
     login,
     logout,
+    registerUser,
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue () { return currentUserSubject.value }
 };
@@ -27,6 +28,34 @@ function login(identifier, password) {
             currentUserSubject.next(user);
 
             return user;
+        })
+        .catch();
+}
+
+function registerUser(username, email, password) {
+    const requestOptions = {
+        headers: { 'Content-Type': 'application/json' },
+    };
+
+    var datapi = "_username="+username+"&_password="+password+"&_email="+email+"";
+
+    let dataUser = {
+        'username': username,
+        'email': email,
+        'password': password
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+
+    var link = process.env.FOOT + "/register";
+    xhr.open("POST", link);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.send(datapi);
+
+    return axios.post(`${process.env.DOMAIN}/auth/local/register`, dataUser, requestOptions)
+        .then(user => {
+            history.push('/')
         })
         .catch();
 }

@@ -42,7 +42,7 @@ class About extends Component{
                 </div>
 
                 <div className="page-wrapper">
-                    { !this.state.website || this.state.role == "Administrator" ? (
+                    { !this.state.website || this.state.role === "Administrator" ? (
                         <BotUI />
                         ) : (
                         <div>Vous avez déjà crée un site ! Si vous souhaitez en créer d'autres vous devez avoir une offre premium. Pour cela <a href="https://api.lmdfoot.com/">cliquez-ici</a></div> 

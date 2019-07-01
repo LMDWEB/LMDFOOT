@@ -38,15 +38,15 @@ class HeroSliderOne extends Component{
                     <div className="hero-slider__single-item" style={{ backgroundImage: `url(assets/img/slider/${val.bgImg})` }} >
                         <div className="hero-slider__content-wrapper">
                             <div className="container">
-                            <div className="row">
-                                <div className="col-lg-12">
-                                <div className="hero-slider__content">
-                                    <h2 className="hero-slider__title">{val.sliderTitle}</h2>
-                                    <p className="hero-slider__text">{val.sliderSubtitle}</p>
-                                    <a className="hero-slider__btn" href={`${process.env.PUBLIC_URL}/${val.btnLink}`}> GET START</a>
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <div className="hero-slider__content">
+                                            <h2 className="hero-slider__title">{val.sliderTitle}</h2>
+                                            <p className="hero-slider__text">{val.sliderSubtitle}</p>
+                                            <a className="hero-slider__btn" href={`${process.env.PUBLIC_URL}/${val.btnLink}`}> GET START</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -56,14 +56,11 @@ class HeroSliderOne extends Component{
 
         return(
             <div>
-                {/*====================  hero slider area ====================*/}
                 <div className="hero-alider-area">
                     <Swiper {...params}>
                         {DataList}
                     </Swiper>
                 </div>
-                {/*====================  End of hero slider area  ====================*/}
-
             </div>
         )
     }

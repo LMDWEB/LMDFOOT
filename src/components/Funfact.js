@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
 
-
 class Funfact extends Component{
 
     state = {
         didViewCountUp: false
       };
-    
     
       onVisibilityChange = isVisible => {
         if (isVisible) {
@@ -19,10 +17,10 @@ class Funfact extends Component{
     render(){
 
         let data = [
-            {img: 'funfact-project.png', countNum : 598, countTitle: 'Projects' },
-            {img: 'funfact-clients.png', countNum : 128, countTitle: 'Clients' },
-            {img: 'funfact-success.png', countNum : 114, countTitle: 'Success' },
-            {img: 'funfact-award.png', countNum : 109, countTitle: 'Awards' }
+            {img: 'funfact-project.png', countNum : 598, countTitle: 'Articles' },
+            {img: 'funfact-clients.png', countNum : 128, countTitle: 'Sites' },
+            {img: 'funfact-success.png', countNum : 114, countTitle: 'Utilisateurs' },
+            {img: 'funfact-award.png', countNum : 109, countTitle: 'Partenaires' }
         ];
 
         let DataList = data.map((val, i)=>{
@@ -30,9 +28,9 @@ class Funfact extends Component{
                 <div className="single-fact col-md-3 col-6 section-space--bottom--30" key={i}>
                     <img src={`assets/img/icons/${val.img}`} alt="" />
                     <h1 className="counter">
-                    <VisibilitySensor onChange={this.onVisibilityChange} offset={{top:10}} delayedCall>
-                        <CountUp end={this.state.didViewCountUp ? val.countNum : 0} />
-                    </VisibilitySensor>
+                        <VisibilitySensor onChange={this.onVisibilityChange} offset={{top:10}} delayedCall>
+                            <CountUp end={this.state.didViewCountUp ? val.countNum : 0} />
+                        </VisibilitySensor>
                     </h1>
                     <h4>{val.countTitle}</h4>
                 </div>

@@ -2,38 +2,15 @@ import React, {Component} from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import MobileMenu from '../components/MobileMenu';
-import { registerUser } from '../../api/auth';
+import {authenticationService} from "../services/authentification.service";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import history from '../helpers/history';
 
 class Register extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            email: '',
-            password: ''
-        };
-    
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
-    
-      handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-    
-        this.setState({
-          [name]: value
-        });
-      }
-
-      handleSubmit(event) {
-        registerUser(this.state);
-        this.props.history.push('/');
-
-        event.preventDefault();
-      }
+    notify = () => toast("Wow so easy !");
 
     render(){
         return(
@@ -61,20 +38,49 @@ class Register extends Component{
                             <div className="col-lg-12 col-12">
                             <div className="contact-form">
                                 <h3>Inscrivez-vous</h3>
-                                <form id="contact-form" onSubmit={this.handleSubmit}>
-                                    <div className="row row-10">
-                                        <div className="col-md-12 col-12 section-space--bottom--20">
-                                            <input name="username" type="text" placeholder="Your Name" value={this.state.username} onChange={this.handleInputChange} />
-                                        </div>
-                                        <div className="col-md-12 col-12 section-space--bottom--20">
-                                            <input name="email" type="email" placeholder="Your Email" value={this.state.email} onChange={this.handleInputChange} />
-                                        </div>
-                                        <div className="col-md-12 col-12 section-space--bottom--20">
-                                            <input name="password" type="password" placeholder="Your Password" value={this.state.password} onChange={this.handleInputChange} />
-                                        </div>
-                                        <div className="col-12"><button type="submit">S'inscrire</button></div>
-                                    </div>
-                                </form>
+                                <Formik
+                                    initialValues={{
+                                        username: '',
+                                        email: '',
+                                        password: ''
+                                    }}
+                                    validationSchema={Yup.object().shape({
+                                        username: Yup.string().required('Username is required').min(5),
+                                        email: Yup.string().required('E-mail is required'),
+                                        password: Yup.string().required('Password is required').min(5)
+                                    })}
+                                    onSubmit={({ username, email, password }, { setStatus, setSubmitting }) => {
+                                        setStatus();
+
+                                        authenticationService.registerUser(username, email, password);
+                                        history.push('/');
+                                    }}
+                                    render={({ errors, status, touched, isSubmitting }) => (
+                                        <Form>
+                                            <div className="row row-10">
+                                                <div className="col-md-12 col-12 section-space--bottom--20">
+                                                    <Field name="username" type="text" className={'form-control' + (errors.username && touched.username ? ' is-invalid' : '')} />
+                                                    <ErrorMessage name="username" component="div" className="invalid-feedback" />
+                                                </div>
+                                                <div className="col-md-12 col-12 section-space--bottom--20">
+                                                    <Field name="email" type="email" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                                                    <ErrorMessage name="email" component="div" className="invalid-feedback" />
+                                                </div>
+                                                <div className="col-md-12 col-12 section-space--bottom--20">
+                                                    <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                                                    <ErrorMessage name="password" component="div" className="invalid-feedback" />
+                                                </div>
+                                                <div className="col-12">
+                                                    <button  type="submit" className="btn btn-primary" disabled={isSubmitting}>S'inscrire</button>
+                                                </div>
+                                                {status &&
+                                                    <div className={'alert alert-danger'}>{status}</div>
+                                                }
+                                                <ToastContainer />
+                                            </div>
+                                        </Form>
+                                    )}
+                                />
                             </div>
                             </div>
                         </div>

@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import NavBar from '../components/NavBar';
-import BrandLogoSlider from '../components/BrandLogoSlider';
-import Footer from '../components/Footer';
-import MobileMenu from '../components/MobileMenu';
 import axios from 'axios';
 
-class News extends Component{
-    
+class NewsGridSlider extends Component{
     constructor(props) {
         super(props);
 
@@ -23,7 +18,7 @@ class News extends Component{
     }
 
     render(){
-        let Datalist = this.state.articles.map((val, i) => {
+        let DataList = this.state.articles.map((val, i) => {
             return(
                 <div className="col-lg-4 col-md-6 col-12 section-space--bottom--30" key={i}>
                     <div className="service-grid-item">
@@ -50,65 +45,31 @@ class News extends Component{
                 </div>
             )
         });
-
+        
         return(
             <div>
-
-                {/* Navigation bar */}
-                <NavBar/>
-
-                {/* breadcrumb */}
-                {/*====================  breadcrumb area ====================*/}
-                <div className="breadcrumb-area breadcrumb-bg">
+                <div className="service-grid-slider-area section-space--inner--120">
                     <div className="container">
                         <div className="row">
-                            <div className="col">
-                                <div className="page-banner text-center">
-                                    <h1>News</h1>
-                                    <ul className="page-breadcrumb">
-                                        <li><a href="/">Home</a></li>
-                                        <li>News</li>
-                                    </ul>
+                            <div className="col-lg-12">
+                                <div className="section-title-area text-center">
+                                <h2 className="section-title section-space--bottom--50">News</h2>
+                                </div>
+                            </div>
+                            <div className="col-lg-12">
+                                <div className="service-item-wrapper">
+                                    <div className="row">
+                                        {DataList}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {/*====================  End of breadcrumb area  ====================*/}
-
-                {/*====================  service page content ====================*/}
-                <div className="page-wrapper section-space--inner--120">
-                {/*Service section start*/}
-                <div className="service-section">
-                    <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                        <div className="service-item-wrapper">
-                            <div className="row">
-                                {Datalist}
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                {/*Service section end*/}
-                </div>
-
-                {/*====================  End of service page content  ====================*/}
-
-                {/* Brand logo */}
-                <BrandLogoSlider background = "grey-bg" />
-
-                {/* Footer */}
-                <Footer/>
-
-                {/* Mobile Menu */}
-                <MobileMenu/>
-
             </div>
         )
     }
 }
 
-export default News;
+
+export default NewsGridSlider;

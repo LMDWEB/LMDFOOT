@@ -52,8 +52,8 @@ class NavBar extends Component{
                                 </div>
                             ) : (
                                 <div className="top-bar-right-wrapper">
-                                    <a href={`${process.env.PUBLIC_URL}/register`} className="ht-btn ht-btn--default d-inline-block">{ this.state.currentUser.user.username }</a>
-                                    <a onClick={this.logout} className="ht-btn ht-btn--default d-inline-block">Déconnexion</a>
+                                    <a href="profile" className="ht-btn ht-btn--default d-inline-block">{ this.state.currentUser.user.username }</a>
+                                    <a href onClick={this.logout} className="ht-btn ht-btn--default d-inline-block">Déconnexion</a>
                                 </div>
                             )
                             } 
@@ -93,7 +93,7 @@ class NavBar extends Component{
                                                     <li>
                                                         <a href={`${process.env.PUBLIC_URL}/about-us`}>ABOUT</a>
                                                     </li>
-                                                    <li className="has-children has-children--multilevel-submenu">
+                                                    <li>
                                                         <a href={`${process.env.PUBLIC_URL}/news`}>NEWS</a>
                                                     </li>
                                                     <li>

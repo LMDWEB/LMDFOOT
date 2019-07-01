@@ -1,4 +1,5 @@
 import { request, requestApiFoot, errHandler } from './sporty'
+import history from '../src/helpers/history';
 
 function loginApi(credentials) {
     return requestApiFoot
@@ -49,15 +50,19 @@ function registerUser(data) {
       }
     });
 
-    xhr.open("POST", process.env.DOMAIN + '/register');
-    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    var link = "http://api.lmdfoot.com/register";
 
+    xhr.open("POST", link);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     xhr.send(datapi);
 
     //createUserFoot(data);
     let url = '/auth/local/register'
     return request.post(url, data)
-      .then(({ data }) => data)
+      .then(({ data }) => {
+        history.push('/');
+        data
+      })
       .catch(errHandler)
   }
 
