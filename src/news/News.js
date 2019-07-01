@@ -4,6 +4,7 @@ import BrandLogoSlider from '../components/BrandLogoSlider';
 import Footer from '../components/Footer';
 import MobileMenu from '../components/MobileMenu';
 import axios from 'axios';
+import { cpus } from 'os';
 
 class Services extends Component{
     
@@ -11,14 +12,13 @@ class Services extends Component{
         super(props);
 
         this.state = {
-            data: ""
+            articles: []
         };
     }
 
     async componentDidMount() {
         axios.get(`${process.env.DOMAIN}/articles?_limit=20`)
         .then(({ data }) => {
-            console.log(data);
             this.setState({ articles: data});
         })
     }
@@ -33,26 +33,29 @@ class Services extends Component{
             {pageLink: 'service-details-left-sidebar', img: 'service-1.jpg', iconClass: 'flaticon-002-welding', serviceTitle: 'Work Management', serviceSubtitle: 'Lorem ipsum dolor sit amet consect adipisi elit sed do eiusm tempor'}
         ];
 
-        let Datalist = dataNews.map((val, i) => {
+
+        let Datalist = this.state.articles.map((val, i) => {
             return(
                 <div className="col-lg-4 col-md-6 col-12 section-space--bottom--30" key={i}>
                     <div className="service-grid-item">
                     <div className="service-grid-item__image">
                         <div className="service-grid-item__image-wrapper">
-                        <a href={`${process.env.PUBLIC_URL}/${val.pageLink}`}>
-                            <img src={`assets/img/service/${val.img}`} className="img-fluid" alt="Service Grid" />
-                        </a>
-                        </div>
-                        <div className="icon">
-                        <i className={val.iconClass} />
+                            <a href={`${process.env.DOMAIN}/${val.id}`}>
+                                { val.image ? (
+                                    <img src={`${process.env.DOMAIN}${val.image.url}`} className="img-fluid" alt={val.title} />
+                                ) : (
+                                    <img src="service3.jpg" className="img-fluid" alt={val.title} />
+                                )
+                                }
+                            </a>
                         </div>
                     </div>
                     <div className="service-grid-item__content">
                         <h3 className="title">
-                        <a href={`${process.env.PUBLIC_URL}/${val.pageLink}`}>{val.serviceTitle}</a>
+                        <a href={`${process.env.DOMAIN}/${val.id}`}>{val.title}</a>
                         </h3>
-                        <p className="subtitle">{val.serviceSubtitle}</p>
-                        <a href={`${process.env.PUBLIC_URL}/${val.pageLink}`} className="see-more-link">SEE MORE</a>
+                        <p className="subtitle">{val.resume.substring(0, 180)}</p>
+                        <a href={`${process.env.DOMAIN}/${val.link}`} className="see-more-link">Voir plus</a>
                     </div>
                     </div>
                 </div>
