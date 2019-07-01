@@ -9,14 +9,16 @@ class About extends Component{
     constructor () {
         super()
         this.state = {
-          isOpen: false
+          website: '',
+          role: ''
         }
-        this.openModal = this.openModal.bind(this)
       }
-     
-      openModal () {
-        this.setState({isOpen: true})
-      }
+
+    componentDidMount() {
+        const data = window.localStorage.getItem("currentUser");
+        const response = JSON.parse(data);
+        this.setState({website: response.user.website, role: response.user.role.name});
+    }
 
     render(){
         return(
@@ -40,7 +42,12 @@ class About extends Component{
                 </div>
 
                 <div className="page-wrapper">
-                    <BotUI />
+                    { !this.state.website || this.state.role == "Administrator" ? (
+                        <BotUI />
+                        ) : (
+                        <div>Vous avez déjà crée un site ! Si vous souhaitez en créer d'autres vous devez avoir une offre premium. Pour cela <a href="https://api.lmdfoot.com/">cliquez-ici</a></div> 
+                        )
+                    }
                 </div>
                 <Footer/>
 

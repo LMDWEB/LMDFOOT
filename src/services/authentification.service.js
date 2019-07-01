@@ -27,7 +27,8 @@ function login(identifier, password) {
             currentUserSubject.next(user);
 
             return user;
-        });
+        })
+        .catch();
 }
 
 function logout() {

@@ -1,18 +1,27 @@
 import React, {Component} from 'react';
 import Botui from 'botui-react';
 import axios from 'axios';
+import history from '../helpers/history';
 
 class BotUI extends Component {
     componentDidMount() {
         let website = '';
 
+        const data = window.localStorage.getItem("currentUser");
+        const response = JSON.parse(data);
+
         var post = function (name, website) {
-            axios.post(process.env.DOMAIN, {
-              name: name,
-              link: website
+            axios.post(process.env.DOMAIN + '/websites/', {
+                name: name,
+                link: website,
+                admin: response.user.id
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + response.jwt
+                }
             })
-        
-            // this.$router.push({ path: website })
+            .catch()
         }
               
         var askWebsite = () => {
@@ -76,7 +85,15 @@ class BotUI extends Component {
         var end = (res) => {
             this.botui.message.bot({
                 delay: 1000,
-                content: 'Merci. Vous allons vous redigez vers votre nouveau site'
+                content: 'Parfait ! Vous allons vous créer votre sous nom de domaine dans moins d\'une heure'
+            })
+            this.botui.message.bot({
+                delay: 5000,
+                content: 'Vous aurez la possibilité de rédiger autant d\'article que vous le souhaitez'
+            })
+            this.botui.message.bot({
+                delay: 10000,
+                content: 'A l\'avenir vous pourrez créer votre propre template'
             })
         }
         
@@ -119,6 +136,7 @@ class BotUI extends Component {
                     content: website
                 })
                 end(res)
+                history.push("/");
             } else {
                 this.botui.message.human({
                     delay: 500,

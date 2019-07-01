@@ -30,7 +30,7 @@ class Register extends Component{
 
       handleSubmit(event) {
         registerUser(this.state);
-        history.push('/');
+        this.props.history.push('/');
 
         event.preventDefault();
       }
@@ -72,7 +72,7 @@ class Register extends Component{
                                         <div className="col-md-12 col-12 section-space--bottom--20">
                                             <input name="password" type="password" placeholder="Your Password" value={this.state.password} onChange={this.handleInputChange} />
                                         </div>
-                                        <div className="col-12"><button>S'inscrire</button></div>
+                                        <div className="col-12"><button type="submit">S'inscrire</button></div>
                                     </div>
                                 </form>
                             </div>

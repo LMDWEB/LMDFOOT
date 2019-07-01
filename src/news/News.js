@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 import BrandLogoSlider from '../components/BrandLogoSlider';
 import Footer from '../components/Footer';
 import MobileMenu from '../components/MobileMenu';
-import news, { getArticles } from '../../api/news';
+import axios from 'axios';
 
 class Services extends Component{
     
@@ -15,11 +15,13 @@ class Services extends Component{
         };
     }
 
-    // async componentDidMount() {
-    //    getArticles();
-        
-    //     console.log(process.env.DOMAIN);
-    //}
+    async componentDidMount() {
+        axios.get(`${process.env.DOMAIN}/articles?_limit=20`)
+        .then(({ data }) => {
+            console.log(data);
+            this.setState({ articles: data});
+        })
+    }
 
     render(){
         let dataNews = [
