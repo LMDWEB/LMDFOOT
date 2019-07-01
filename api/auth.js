@@ -49,7 +49,7 @@ function registerUser(data) {
       }
     });
 
-    xhr.open("POST", process.env.DOMAIN);
+    xhr.open("POST", process.env.DOMAIN + '/register');
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
     xhr.send(datapi);

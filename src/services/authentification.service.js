@@ -19,7 +19,7 @@ function login(identifier, password) {
         body: JSON.stringify({ identifier, password })
     };
 
-    return fetch(`${process.env.DOMAIN}/auth/local`, requestOptions)
+    return fetch(`${process.env.DOMAIN}auth/local`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
