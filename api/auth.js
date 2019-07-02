@@ -50,8 +50,6 @@ function registerUser(data) {
       }
     });
 
-    var link = "http://api.lmdfoot.com/register";
-
     xhr.open("POST", link);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     xhr.send(datapi);

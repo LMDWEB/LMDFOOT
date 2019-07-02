@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { PrivateRoute } from './components/PrivateRoute';
 import './index.scss';
-import Home from './Home';
 import About from './pages/About';
 import Website from './pages/Website';
 import News from './news/News';
@@ -12,15 +11,20 @@ import PageNotFound from './pages/404';
 import NoMAtch from './pages/404';
 import {BrowserRouter, Switch, Router, Route} from 'react-router-dom';
 import  history  from './helpers/history';
+import { HomePageLink } from './helpers/subDomain.js';
 import * as serviceWorker from './serviceWorker';
+import HomeCMS from './HomeCMS';
 
 class Root extends Component{
+    
     render(){
+        const home = HomePageLink();
+        
         return(
                 <Router history={history}>
-                    <BrowserRouter basename={'/'}>
+                    <BrowserRouter basename={`${home}/`}>
                         <Switch>
-                            <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home}/>
+                            <Route exact path={`${process.env.PUBLIC_URL}/`} component={HomeCMS}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/about-us`} component={About}/>
                             <PrivateRoute exact path={`${process.env.PUBLIC_URL}/website`} component={Website}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/news`} component={News}/>
