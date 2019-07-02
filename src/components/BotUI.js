@@ -11,7 +11,7 @@ class BotUI extends Component {
         const response = JSON.parse(data);
 
         var post = function (name, website) {
-            axios.post(process.env.DOMAIN + '/websites/', {
+            axios.post(process.env.DOMAIN + 'websites/', {
                 name: name,
                 link: website,
                 admin: response.user.id

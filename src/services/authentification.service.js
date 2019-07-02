@@ -53,7 +53,7 @@ function registerUser(username, email, password) {
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     xhr.send(datapi);
 
-    return axios.post(`${process.env.DOMAIN}/auth/local/register`, dataUser, requestOptions)
+    return axios.post(`${process.env.DOMAIN}auth/local/register`, dataUser, requestOptions)
         .then(user => {
             history.push('/')
         })
