@@ -5,6 +5,7 @@ import './index.scss';
 import About from './pages/About';
 import Website from './pages/Website';
 import News from './news/News';
+import NewsDetails from './news/NewsDetails';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PageNotFound from './pages/404';
@@ -17,7 +18,11 @@ import HomeCMS from './HomeCMS';
 class Root extends Component{
     
     render(){
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+
         return(
+            
                 <Router history={history}>
                     <BrowserRouter basename={`${process.env.PUBLIC_URL}/`}>
                         <Switch>
@@ -25,6 +30,7 @@ class Root extends Component{
                             <Route exact path={`${process.env.PUBLIC_URL}/about-us`} component={About}/>
                             <PrivateRoute exact path={`${process.env.PUBLIC_URL}/website`} component={Website}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/news`} component={News}/>
+                            <Route exact path={`${process.env.PUBLIC_URL}/news/${id}`} component={NewsDetails}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/login`} component={Login}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/register`} component={Register}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/404`} component={PageNotFound}/>

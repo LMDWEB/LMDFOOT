@@ -96,7 +96,7 @@ class BotUI extends Component {
                 if (res.confirm) {
                     post(res.name, res.link);
                     end(res);
-                    history.push(res.link);
+                    history.push("http://" + res.link);
                 } else {
                     askWebsite();
                 }

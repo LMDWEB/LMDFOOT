@@ -22,7 +22,7 @@ class NewsGridSlider extends Component{
                     <div className="service-grid-item">
                     <div className="service-grid-item__image">
                         <div className="service-grid-item__image-wrapper">
-                            <a href={`${process.env.DOMAIN}${val.id}`}>
+                            <a href={`http://${val.website.link}/${val.id}`}>
                                 { val.image ? (
                                     <img src={`${process.env.DOMAIN}${val.image.url}`} className="img-fluid" alt={val.title} />
                                 ) : (
@@ -34,10 +34,10 @@ class NewsGridSlider extends Component{
                     </div>
                     <div className="service-grid-item__content">
                         <h3 className="title">
-                        <a href={`${process.env.DOMAIN}${val.id}`}>{val.title}</a>
+                        <a href={`http://${val.website.link}/news/${val.id}`}>{val.title}</a>
                         </h3>
                         <p className="subtitle">{val.resume.substring(0, 150)}...</p>
-                        <a href={`${process.env.DOMAIN}${val.link}`} className="see-more-link">Voir plus</a>
+                        <a href={`http://${val.website.link}/news/${val.id}`} className="see-more-link">Voir plus</a>
                     </div>
                     </div>
                 </div>
