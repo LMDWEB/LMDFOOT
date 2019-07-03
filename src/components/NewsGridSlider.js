@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import { getArticles } from '../../api/news';
 
 class NewsGridSlider extends Component{
     constructor(props) {
@@ -9,12 +9,10 @@ class NewsGridSlider extends Component{
             articles: []
         };
     }
-
+    
     async componentDidMount() {
-        axios.get(`${process.env.DOMAIN}articles?_limit=20&status=Published`)
-        .then(({ data }) => {
-            this.setState({ articles: data});
-        })
+        const articles = await getArticles(20);
+        this.setState({articles: articles});
     }
 
     render(){
@@ -28,7 +26,7 @@ class NewsGridSlider extends Component{
                                 { val.image ? (
                                     <img src={`${process.env.DOMAIN}${val.image.url}`} className="img-fluid" alt={val.title} />
                                 ) : (
-                                    <img src="service3.jpg" className="img-fluid" alt={val.title} />
+                                    <img src="assets/img/service/service3.jpg" className="img-fluid" alt={val.title} />
                                 )
                                 }
                             </a>

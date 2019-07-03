@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 import BrandLogoSlider from '../components/BrandLogoSlider';
 import Footer from '../components/Footer';
 import MobileMenu from '../components/MobileMenu';
-import axios from 'axios';
+import { getArticles } from '../../api/news';
 
 class News extends Component{
     
@@ -16,10 +16,8 @@ class News extends Component{
     }
 
     async componentDidMount() {
-        axios.get(`${process.env.DOMAIN}articles?_limit=20&status=Published`)
-        .then(({ data }) => {
-            this.setState({ articles: data});
-        })
+        const articles = await getArticles(20);
+        this.setState({articles: articles});
     }
 
     render(){

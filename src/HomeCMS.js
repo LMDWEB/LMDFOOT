@@ -9,10 +9,6 @@ import MobileMenu from './components/MobileMenu';
 
 class HomeCMS extends Component{
 
-    componentDidMount() {
-        console.log(window.location.hostname);
-    }
-
     render(){
         return(
             <div>
@@ -21,10 +17,12 @@ class HomeCMS extends Component{
                 
                 {/* Hero slider */}
                 <HeroSliderOne/>
+
                 {/* Service grid slider */}
                 <NewsGridSlider/>
                 
-                
+                <Funfact />
+
                 {/* Brand logo */}
                 <BrandLogoSlider background = "" />
 

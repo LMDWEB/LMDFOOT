@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
+import { getArticles } from '../../api/news';
 
 class Funfact extends Component{
 
@@ -13,11 +14,27 @@ class Funfact extends Component{
           this.setState({didViewCountUp: true});
         }
       }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            countArticle: ""
+        };
+    }
+    
+    async componentDidMount() {
+        const articles = await getArticles();
+        this.setState({countArticle: articles.length});
+
+        console.log(this.state)
+    }
+
     
     render(){
 
         let data = [
-            {img: 'funfact-project.png', countNum : 598, countTitle: 'Articles' },
+            {img: 'funfact-project.png', countNum : this.state.countArticle, countTitle: 'Articles' },
             {img: 'funfact-clients.png', countNum : 128, countTitle: 'Sites' },
             {img: 'funfact-success.png', countNum : 114, countTitle: 'Utilisateurs' },
             {img: 'funfact-award.png', countNum : 109, countTitle: 'Partenaires' }

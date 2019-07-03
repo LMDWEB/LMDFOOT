@@ -53,7 +53,7 @@ class NavBar extends Component{
                             ) : (
                                 <div className="top-bar-right-wrapper">
                                     <a href="profile" className="ht-btn ht-btn--default d-inline-block">{ this.state.currentUser.user.username }</a>
-                                    <a href onClick={this.logout} className="ht-btn ht-btn--default d-inline-block">Déconnexion</a>
+                                    <a href='/' onClick={this.logout} className="ht-btn ht-btn--default d-inline-block">Déconnexion</a>
                                 </div>
                             )
                             } 

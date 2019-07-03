@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
 import Swiper from 'react-id-swiper';
+import { getArticles } from '../../api/news';
 
 class HeroSliderOne extends Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            articles: []
+        };
+    }
     
+    async componentDidMount() {
+        const articles = await getArticles(20, true);
+        this.setState({articles: articles});
+    }
+
     render(){
         const params = {
             slidesPerView : 1,
@@ -25,25 +38,20 @@ class HeroSliderOne extends Component{
             }
         }
 
-        let data = [
-            {bgImg: 'slider3.jpg', sliderTitle: 'Build Your Dream With Passion', sliderSubtitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusm tempor incididunt ut labore et dolore.', btnLink: 'contact-us'},
-            {bgImg: 'slider2.jpg', sliderTitle: 'Build Your Dream With Passion', sliderSubtitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusm tempor incididunt ut labore et dolore.', btnLink: 'contact-us'},
-            {bgImg: 'slider1.jpg', sliderTitle: 'Build Your Dream With Passion', sliderSubtitle: 'Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusm tempor incididunt ut labore et dolore.', btnLink: 'contact-us'}
-        ];
-
-        let DataList = data.map((val, i)=>{
+        let DataList = this.state.articles.map((val, i)=>{
             return(
                 
                 <div className="swiper-slide" key={i}>
-                    <div className="hero-slider__single-item" style={{ backgroundImage: `url(assets/img/slider/${val.bgImg})` }} >
+                    
+                    <div className="hero-slider__single-item" style={{ backgroundImage: `url()` }} >
                         <div className="hero-slider__content-wrapper">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-lg-12">
                                         <div className="hero-slider__content">
-                                            <h2 className="hero-slider__title">{val.sliderTitle}</h2>
-                                            <p className="hero-slider__text">{val.sliderSubtitle}</p>
-                                            <a className="hero-slider__btn" href={`${process.env.PUBLIC_URL}/${val.btnLink}`}> GET START</a>
+                                            <h2 className="hero-slider__title">{val.title}</h2>
+                                            <p className="hero-slider__text">{val.resume}</p>
+                                            <a className="hero-slider__btn" href={`${process.env.PUBLIC_URL}/${val.btnLink}`}> Lire</a>
                                         </div>
                                     </div>
                                 </div>

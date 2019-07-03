@@ -59,15 +59,15 @@ class Register extends Component{
                                         <Form>
                                             <div className="row row-10">
                                                 <div className="col-md-12 col-12 section-space--bottom--20">
-                                                    <Field name="username" type="text" className={'form-control' + (errors.username && touched.username ? ' is-invalid' : '')} />
+                                                    <Field name="username" type="text" placeholder="Username" className={'form-control' + (errors.username && touched.username ? ' is-invalid' : '')} />
                                                     <ErrorMessage name="username" component="div" className="invalid-feedback" />
                                                 </div>
                                                 <div className="col-md-12 col-12 section-space--bottom--20">
-                                                    <Field name="email" type="email" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                                                    <Field name="email" type="email" placeholder="Email"  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
                                                     <ErrorMessage name="email" component="div" className="invalid-feedback" />
                                                 </div>
                                                 <div className="col-md-12 col-12 section-space--bottom--20">
-                                                    <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                                                    <Field name="password" type="password" placeholder="Password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
                                                     <ErrorMessage name="password" component="div" className="invalid-feedback" />
                                                 </div>
                                                 <div className="col-12">

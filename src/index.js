@@ -11,18 +11,15 @@ import PageNotFound from './pages/404';
 import NoMAtch from './pages/404';
 import {BrowserRouter, Switch, Router, Route} from 'react-router-dom';
 import  history  from './helpers/history';
-import { HomePageLink } from './helpers/subDomain.js';
 import * as serviceWorker from './serviceWorker';
 import HomeCMS from './HomeCMS';
 
 class Root extends Component{
     
     render(){
-        const home = HomePageLink();
-        
         return(
                 <Router history={history}>
-                    <BrowserRouter basename={`${home}/`}>
+                    <BrowserRouter basename={`${process.env.PUBLIC_URL}/`}>
                         <Switch>
                             <Route exact path={`${process.env.PUBLIC_URL}/`} component={HomeCMS}/>
                             <Route exact path={`${process.env.PUBLIC_URL}/about-us`} component={About}/>
