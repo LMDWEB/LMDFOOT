@@ -57,6 +57,7 @@ class BotUI extends Component {
                 const check = checkWebsite(res.value);
 
                 if(check) {
+                    console.log(check);
                     return askWebsite()
                 }
 
@@ -96,7 +97,11 @@ class BotUI extends Component {
                 if (res.confirm) {
                     post(res.name, res.link);
                     end(res);
-                    history.push("http://" + res.link);
+
+                    setTimeout(function () {
+                        window.location.href="http://" + res.link; //will redirect to your blog page (an ex: blog.html)
+                     }, 8000);
+
                 } else {
                     askWebsite();
                 }

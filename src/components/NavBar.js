@@ -22,8 +22,6 @@ class NavBar extends Component{
         authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
         const categories = await getCategories();
         this.setState({categories: categories});
-
-        console.log(this.state);
     }
 
     logout() {
@@ -33,6 +31,15 @@ class NavBar extends Component{
 
     render(){
         const { currentUser } = this.state;
+
+        let Datalist = this.state.categories.map((val, i) => {
+            return(
+                <li key={val.id}>
+                    <a href={`categories/${val.id}`}>{val.name}</a>
+                </li>
+            )
+        });
+
         return(
             <div >
                 <div className="header-area header-sticky header-sticky--default">
@@ -96,20 +103,12 @@ class NavBar extends Component{
                                         <div className="header-navigation__nav position-static">
                                             <nav>
                                                 <ul>
-                                                    <li>
-                                                        <a href={`${process.env.PUBLIC_URL}/about-us`}>ABOUT</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href={`${process.env.PUBLIC_URL}/news`}>NEWS</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href={`${process.env.PUBLIC_URL}/contact-us`}>CONTACT</a>
-                                                    </li>
+                                                    {Datalist}
                                                 </ul>
                                             </nav>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

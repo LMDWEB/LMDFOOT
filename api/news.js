@@ -1,6 +1,4 @@
 import { request, errHandler } from "./sporty";
-import { subDomain } from '../src/helpers/subDomain';
-import { history } from '../src/helpers/history';
 
 export async function getArticles(limit, featured) {
   const website = await checkWebsite();
@@ -9,6 +7,16 @@ export async function getArticles(limit, featured) {
 
   return request
     .get(`articles/?status=Published${website}&_limit=${isLimit}&featured=${isFeatured}`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch(errHandler);
+}
+
+export async function getArticle(id) {
+
+  return request
+    .get(`articles/${id}`)
     .then(({ data }) => {
       return data;
     })

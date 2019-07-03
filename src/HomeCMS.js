@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import NavBar from './components/NavBar';
 import HeroSliderOne from './components/HeroSliderOne';
 import NewsGridSlider from './components/NewsGridSlider';
-import Funfact from './components/Funfact';
+// import Funfact from './components/Funfact';
 import BrandLogoSlider from './components/BrandLogoSlider';
 import Footer from './components/Footer';
 import MobileMenu from './components/MobileMenu';
@@ -21,7 +21,7 @@ class HomeCMS extends Component{
                 {/* Service grid slider */}
                 <NewsGridSlider/>
                 
-                <Funfact />
+                {/* <Funfact /> */}
 
                 {/* Brand logo */}
                 <BrandLogoSlider background = "" />
