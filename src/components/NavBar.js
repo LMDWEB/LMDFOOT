@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { authenticationService } from '../services/authentification.service';
 import history from '../helpers/history';
+import { getCategories } from '../../api/news';
 
 class NavBar extends Component{
 
@@ -8,7 +9,8 @@ class NavBar extends Component{
         super(props);
 
         this.state = {
-            currentUser: null
+            currentUser: null,
+            categories: []
         };
 
         if (authenticationService.currentUserValue) { 
@@ -16,8 +18,12 @@ class NavBar extends Component{
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         authenticationService.currentUser.subscribe(x => this.setState({ currentUser: x }));
+        const categories = await getCategories();
+        this.setState({categories: categories});
+
+        console.log(this.state);
     }
 
     logout() {

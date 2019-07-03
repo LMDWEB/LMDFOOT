@@ -26,11 +26,8 @@ class Funfact extends Component{
     async componentDidMount() {
         const articles = await getArticles();
         this.setState({countArticle: articles.length});
-
-        console.log(this.state)
     }
 
-    
     render(){
 
         let data = [

@@ -15,6 +15,17 @@ export async function getArticles(limit, featured) {
     .catch(errHandler);
 }
 
+export async function getCategories() {
+  const website = await checkWebsite();
+
+  return request
+  .get(`categories/?_limit=8${website}`)
+  .then(({ data }) => {
+    return data;
+  })
+  .catch(errHandler);
+}
+
 
 function checkWebsite() {
 

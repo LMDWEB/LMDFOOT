@@ -23,6 +23,19 @@ class BotUI extends Component {
             })
             .catch()
         }
+
+        var checkWebsite = function(url) {
+            axios.get(process.env.DOMAIN + 'websites/?link=' + url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + response.jwt
+                }
+            })
+            .then(({ data }) => {
+                return data;
+            })
+            .catch()
+        }
               
         var askWebsite = () => {
             this.botui.message.bot({
@@ -40,6 +53,13 @@ class BotUI extends Component {
                 }
               })
             }).then((res) => {
+
+                const check = checkWebsite(res.value);
+
+                if(check) {
+                    return askWebsite()
+                }
+
                 let name = removeAccents(res.value)
                 let nameWebsite = name + '.lmdfoot.com'
             
@@ -76,6 +96,7 @@ class BotUI extends Component {
                 if (res.confirm) {
                     post(res.name, res.link);
                     end(res);
+                    history.push(res.link);
                 } else {
                     askWebsite();
                 }
@@ -85,7 +106,7 @@ class BotUI extends Component {
         var end = (res) => {
             this.botui.message.bot({
                 delay: 1000,
-                content: 'Parfait ! Vous allons vous créer votre sous nom de domaine dans moins d\'une heure'
+                content: 'Parfait ! Vous allons vous créer votre sous nom de domaine dans quelques secondes'
             })
             this.botui.message.bot({
                 delay: 5000,

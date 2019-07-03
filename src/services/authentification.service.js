@@ -48,7 +48,7 @@ function registerUser(username, email, password) {
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = false;
 
-    var link = process.env.FOOT + "/register";
+    var link = process.env.FOOT + "register";
     xhr.open("POST", link);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     xhr.send(datapi);
